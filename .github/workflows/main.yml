@@ -18,6 +18,11 @@ jobs:
     run: npm ci
   - name: Run tests
     run: npm test
+  - name: upload the file to github
+    uses: actions/upload-artifact@v4
+    with:
+     name: test.json
+     path: /home/runner/work/Nodejs-GithubActions/Nodejs-GithubActions/test.json
   - name: Build code
     run: npm run build
 

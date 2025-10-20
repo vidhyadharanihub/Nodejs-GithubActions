@@ -8,7 +8,9 @@ jobs:
   runs-on: ubuntu-latest
   steps:
    - name: create a directory
-     run: mkdir myfiles
+     run: |
+      mkdir myfiles
+      pwd
    - name: create a file in the directory
      run: echo "hello" > /myfiles/file1
    - name: upload the file to git-hub 
@@ -18,6 +20,7 @@ jobs:
       path: /myfiles/file1
  downloadfile:
    runs-on: ubuntu-latest
+   needs: uploadfile
    steps:
     - name: download the artifact from previous job to this job
       uses: actions/download-artifact@v5

@@ -1,0 +1,27 @@
+name: Get file from runner and upload to github
+on:
+ push:
+  branches:
+   - master
+jobs:
+ uploadfile:
+  runs-on: ubuntu-latest
+  steps:
+   - name: create a directory
+     run: mkdir myfiles
+   - name: create a file in the directory
+     run: echo "hello" > /myfiles/file1
+   - name: upload the file to git-hub 
+     uses: actions/upload-artifact@v4
+     with:
+      name: my-file
+      path: /myfiles/file1
+  downloadfile:
+   runs-on: ubuntu-latest
+   steps:
+    - name: download the artifact from previous job to this job
+      uses: actions/download-artifact@v5
+      with:
+       name: my-file
+    - name: check f the file is on runner or not 
+      run: ls -ltr
